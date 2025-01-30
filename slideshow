@@ -1,0 +1,157 @@
+<body>
+     <div class="background"></div>
+ <!--container principal do slideshow-->
+<div class="slideshow-container">
+  <!--primeiro slide-->
+    <div class="slide fade">
+      <!--container de texto(titulo e descrição do slide)-->
+        <div class="text-container">
+            <h2>Paris, France</h2>
+            <p>The city of love with its iconic Eiffel Tower.</p>
+        </div>
+      <!--imagem do slide-->
+        <img src="https://www.passagenspromo.com.br/blog/wp-content/uploads/2019/04/viagem-para-paris.jpg" alt="Paris">
+    </div>
+  <!--segundo slide-->
+    <div class="slide fade">
+        <div class="text-container">
+            <h2>The Great Wall of China</h2>
+            <p>The Great Wall of China holds thousands of years of history.</p>
+        </div>
+        <img src="https://static.nationalgeographicbrasil.com/files/styles/image_3200/public/nationalgeographic2710344.jpg?w=1600" alt="The Great Wall of China">
+    </div>
+  <!--terceiro slide-->
+    <div class="slide fade">
+        <div class="text-container">
+            <h2>New York</h2>
+            <p>The city that never sleeps, a concrete jungle where dreams are made of.</p>
+        </div>
+        <img src="https://imagedelivery.net/0LMYosKeo5o-LXOCjdKUuA/tourscanner.com/2022/01/fun-things-to-do-in-New-York-City-at-night.jpg/w=800" alt="New York">
+    </div>
+</div>
+</body>
+
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;/*centraliza o conteúdo horizontalmente*/
+    align-items: center;/*centraliza o conteúdo verticalmente*/
+    min-height: 100vh; /* Garante que o corpo ocupe no mínimo toda a altura da tela */
+    background-color: #f4f4f4;
+}
+
+.background {
+    background-image: url('https://images.squarespace-cdn.com/content/v1/55b7e44de4b0af4724ac5dd6/1660065892525-8D3353CB1ZIOKJ0JWZU6/Turismo+na+%C3%81ustria.jpg?format=2500w');
+    background-size: cover;
+    background-position: center;
+    position: fixed; /* Faz com que o fundo não se mova ao rolar a página */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;   /* Garante que o fundo fique atrás de outros elementos */ 
+}
+
+/* Configurações gerais do slideshow */
+.slideshow-container {
+    display: flex;/* Habilita layout flexível */
+    flex-direction: column;/* Empilha os slides verticalmente */
+    align-items: flex-start;/* Alinha os itens ao lado esquerdo */
+    max-width: 100%;
+    width: 800px; /* Largura fixa */
+    height: 400px; /* Altura fixa */
+    margin: 0 auto;/* Centraliza horizontalmente */
+    position: relative;
+}
+
+/* Configurações de cada slide */
+.slide {
+    display: none;/* Oculta todos os slides inicialmente */
+    display: flex;/* Organiza o texto e a imagem lado a lado */
+    align-items: center;
+    justify-content: space-between; /* Deixa o texto e a imagem separados */
+    gap: 20px;/* Espaço entre o texto e a imagem */
+    width: 100%; /* Largura total do slideshow */
+    height: 100%;
+    padding: 10px; /* Adicione espaçamento interno */
+    box-sizing: border-box; /* Inclui bordas no cálculo de tamanho */
+}
+
+img {
+    width: 70%; /* A imagem ocupará metade da largura do slide */
+    height: 100%; /* Altura total do slide */
+    object-fit: cover;  /* Garante que a imagem preencha proporcionalmente sem distorções */
+    border-radius: 10px; /* Bordas arredondadas */
+}
+
+.text-container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border-radius: 8px;
+    max-width: 300px; /* Limite a largura do texto */
+}
+
+.text-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 10px;
+}
+
+.text-container p {
+    font-size: 16px;
+    line-height: 1.5; /* Espaçamento entre linhas */
+    margin: 0;
+}
+
+/* Animação */
+.fade {
+    animation: fade 9s ease-in-out infinite;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+let slideIndex = 0;// Variável que rastreia o índice do slide atual
+
+function showSlides() {
+    let slides = document.querySelectorAll('.slide'); // Seleciona todos os slides
+
+    // Oculta todas as slides
+    slides.forEach(slide => slide.style.display = "none");
+
+    slideIndex++;// Move para o próximo slide
+
+    // Reinicia para o primeiro slide se ultrapassar o último
+
+    if (slideIndex > slides.length) { slideIndex = 1 }
+
+    slides[slideIndex - 1].style.display = "flex"; // Exibe o slide atual como flex
+    setTimeout(showSlides, 3000); // Muda de slide a cada 3 segundos
+}
+
+showSlides();// Inicia o slideshow
